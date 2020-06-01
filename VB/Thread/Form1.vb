@@ -12,8 +12,6 @@
 ' You can find sample updates and versions for different programming languages here:
 ' http://www.devexpress.com/example=E813
 
-
-Imports Microsoft.VisualBasic
 Imports System
 Imports System.Collections.Generic
 Imports System.ComponentModel
@@ -23,15 +21,17 @@ Imports System.Text
 Imports System.Windows.Forms
 Imports DevExpress.XtraGrid
 Imports System.Threading
+Imports System.Threading.Tasks
 
 Namespace Thread
 	Partial Public Class Form1
 		Inherits Form
+
 		Public Sub New()
 			InitializeComponent()
 		End Sub
 
-		Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+		Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 			InitData()
 			FillData()
 			InitGridColumns()
@@ -46,13 +46,15 @@ Namespace Thread
 			data.EndInit()
 		End Sub
 
-		Private Sub AddColumn(ByVal data As DataTable, ByVal name As String, ByVal type As Type)
-			AddColumn(data, name, type, False)
+'INSTANT VB NOTE: The variable name was renamed since Visual Basic does not handle local variables named the same as class members well:
+		Private Sub AddColumn(ByVal data As DataTable, ByVal name_Conflict As String, ByVal type As Type)
+			AddColumn(data, name_Conflict, type, False)
 		End Sub
-		Private Sub AddColumn(ByVal data As DataTable, ByVal name As String, ByVal type As Type, ByVal ro As Boolean)
+'INSTANT VB NOTE: The variable name was renamed since Visual Basic does not handle local variables named the same as class members well:
+		Private Sub AddColumn(ByVal data As DataTable, ByVal name_Conflict As String, ByVal type As Type, ByVal ro As Boolean)
 			Dim col As DataColumn
-			col = New DataColumn(name, type)
-			col.Caption = name
+			col = New DataColumn(name_Conflict, type)
+			col.Caption = name_Conflict
 			col.ReadOnly = ro
 			data.Columns.Add(col)
 		End Sub
@@ -71,7 +73,7 @@ Namespace Thread
 			Else
 				data.Clear()
 				For i As Integer = 0 To 300
-					data.Rows.Add(New Object() {i + 1, "Row " & (i + 1).ToString()})
+					data.Rows.Add(New Object() { i + 1, "Row " & (i + 1).ToString() })
 				Next i
 			End If
 		End Sub
@@ -83,30 +85,26 @@ Namespace Thread
 			gridControl1.DataSource = data
 		End Sub
 
+'INSTANT VB TODO TASK: There is no VB equivalent to 'volatile':
+'ORIGINAL LINE: volatile bool deleting = false;
 		Private deleting As Boolean = False
-		Private Delegate Sub UpdateDataSourceDelegate()
 
-        Dim clone As DataTable = Nothing
-		Private Sub UpdateGridDataSource()
-            clone = data.Copy()
-			FillData(clone, deleting)
+		Private Sub UpdateGridDataSource(ByVal copy As DataTable)
+			FillData(copy, deleting)
 			deleting = Not deleting
-            gridControl1.BeginInvoke(New MethodInvoker(AddressOf AnonymousMethod1))
-			data = clone
-        End Sub
-
-        Private Sub AnonymousMethod1()
-            gridControl1.DataSource = clone
-        End Sub
+			gridControl1.BeginInvoke(New Action(Sub()
+				gridControl1.DataSource = copy
+			End Sub))
+		End Sub
 
 		Private Sub button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles button1.Click
+			If Not Me.button1.IsHandleCreated Then Return
+
 			timer1.Start()
 		End Sub
 
 		Private Sub timer1_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles timer1.Tick
-			Dim threadDelegate As New ThreadStart(AddressOf UpdateGridDataSource)
-			Dim thread As New System.Threading.Thread(threadDelegate)
-			thread.Start()
+			Task.Run(Sub() UpdateGridDataSource(data.Copy()))
 		End Sub
 	End Class
 End Namespace
