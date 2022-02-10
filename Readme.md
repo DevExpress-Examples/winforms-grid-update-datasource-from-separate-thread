@@ -6,7 +6,7 @@
 # Data Grid for Windows Forms - Update a Grid Control's datasource from a separate thread
 
 
-This example shows how to safely update a [Grid Control](https://docs.devexpress.com/WindowsForms/DevExpress.XtraGrid.GridControl)'s data source from a background thread. The approach shown allows you to avoid possible synchronization issues between the main and background threads.
+This example shows how to safely update a [Grid Control](https://docs.devexpress.com/WindowsForms/DevExpress.XtraGrid.GridControl)'s data source from a background thread. The technique shown allows you to avoid possible synchronization issues between the main and background threads.
 
 
 <!-- default file list -->
