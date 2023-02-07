@@ -17,6 +17,7 @@ This example shows how to safely update a [Grid Control](https://docs.devexpress
 <!-- default file list end -->
 
 ## See Also
+- [Best Practices - Update and Load Data from non UI Threads, and Deal with Frequently Updated Data](https://go.devexpress.com/CheatSheets_WinForms_Examples_T947915.aspx)
 - [Can I avoid the ArgumentOutOfRangeException when I update the Grid's data](https://www.devexpress.com/Support/Center/p/AK2981)
-- [DevExpress WinForms Troubleshooting - Asynchronous Programming](https://go.devexpress.com/CheatSheets_WinForms_Examples_T964838.aspx)
-- [DevExpress WinForms Troubleshooting - Grid Control](https://go.devexpress.com/CheatSheets_WinForms_Examples_T934742.aspx)
+- [Troubleshooting - Asynchronous Programming](https://go.devexpress.com/CheatSheets_WinForms_Examples_T964838.aspx)
+- [Troubleshooting - Grid Control](https://go.devexpress.com/CheatSheets_WinForms_Examples_T934742.aspx)
