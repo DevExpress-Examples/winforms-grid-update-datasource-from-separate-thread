@@ -22,7 +22,7 @@ This example shows how to safely update the [Grid Control](https://docs.devexpre
 - [Troubleshooting - Asynchronous Programming](https://supportcenter.devexpress.com/ticket/details/t964838/devexpress-winforms-troubleshooting-asynchronous-programming)
 - [Troubleshooting - Grid Control](https://go.devexpress.com/CheatSheets_WinForms_Examples_T934742.aspx)
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=winforms-grid-update-datasource-from-separate-thread&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=winforms-grid-update-datasource-from-separate-thread&~~~was_helpful=no)
 
